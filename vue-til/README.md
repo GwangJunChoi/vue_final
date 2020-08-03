@@ -77,3 +77,77 @@ export default new VueRouter({
 ```
 - (웹팩 코드 스플리팅 문서)[https://webpack.js.org/guides/code-splitting/]
 - (vuejs 다이나믹 임포트 문서)[https://kr.vuejs.org/v2/guide/components-dynamic-async.html]
+
+
+>#### axios
+```
+npm i axios
+```
+- axios.post()
+```
+(method) AxiosInstance.post<any, AxiosResponse<any>>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<any>>
+```
+- axois.create()
+```
+//(method) AxiosStatic.create(config?: AxiosRequestConfig): AxiosInstance
+//example
+import axios from 'axios';
+
+const instance = axios.create({
+	baseURL: 'http://localhost:3000',
+});
+
+function registerUser(user) {
+	return instance.post('/signup', user);
+}
+
+export { registerUser };
+```
+
+>#### .env 파일 설정
+- vue cli 3 이상 부터 제공
+- .env //프로젝트 루트 생성
+```
+VUE_APP_API_URL=http://localhost:3000
+```
+- example
+```
+const instance = axios.create({
+	baseURL: process.env.VUE_APP_API_URL,
+});
+```
+- .env, .env.production, .env.development
+- [Vue cli env 파일 규칙](https://cli.vuejs.org/guide/mode-and-env.html)
+
+>#### vue router navigation
+- 자바스크립트 단에서의 라우터 이동
+```
+this.$router.push('/');
+```
+- [Vue router navigation](https://router.vuejs.org/guide/essentials/navigation.html)
+
+>#### vuex
+- npm i vuex
+```
+
+```
+
+>#### 
+- 
+```
+```
+
+>#### 
+- 
+```
+```
+
+>#### 
+- 
+```
+```
+
+>#### 
+- 
+```
+```
