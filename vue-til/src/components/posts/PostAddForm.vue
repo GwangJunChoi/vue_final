@@ -15,6 +15,9 @@
 						rows="5"
 						v-model="contents"
 					></textarea>
+					<p v-if="!isContentsValid" class="validation-text warning">
+						Contents length must be less than 200
+					</p>
 				</div>
 				<button type="submit" class="btn">Create</button>
 			</form>
@@ -24,7 +27,7 @@
 </template>
 
 <script>
-import { createPost } from '@/api/index';
+import { createPost } from '@/api/posts';
 
 export default {
 	data() {
@@ -46,6 +49,11 @@ export default {
 				console.log(error);
 				this.logMessage = error.response.data.message;
 			}
+		},
+	},
+	computed: {
+		isContentsValid() {
+			return this.contents.length <= 200;
 		},
 	},
 };
