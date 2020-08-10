@@ -132,13 +132,21 @@ this.$router.push('/');
 
 ```
 
->#### 
-- 
+>#### jwt
+- [json web](https://jwt.io/)
 ```
+//vuex header Authorization property example
+const instance = axios.create({
+	baseURL: process.env.VUE_APP_API_URL,
+	headers: {
+		Authorization: '',
+	},
+});
 ```
 
->#### 
-- 
+>#### axios interceptor
+- reqest or response 전처리 핸들러
+- [axios interceptor](https://github.com/axios/axios#interceptors)
 ```
 ```
 
