@@ -197,6 +197,110 @@ import { formatDate } from '@/utils/filters';
 //main.js
 Vue.filter('formatDate', formatDate);
 ```
+>#### router navigation guard
+- 권한 필요 페이지 요청 체크
+```
+//router example
+{
+  path: '/add',
+  component: () => import('@/views/PostAdd.vue'),
+  meta: {
+    auth: true,
+  },
+},
+//router beforeEach example
+router.beforeEach((to, from, next) => {
+	if (to.meta.auth && !store.getters.isLogin) {
+		console.log('인중 ㅜㄸㅇ');
+		next('/login');
+		return;
+	}
+	next();
+});
+
+```
+
+>#### jest
+- vue test code
+- [jest 공식 사이트](https://jestjs.io/)
+- js test library
+```
+//math.js
+export function sum(a, b) {
+  return a + b;
+}
+
+//test.spec.js
+import { sum } from './math';
+
+describe('math.js', () => {
+  test('10 + 20 = 30', () => {
+    const result = sum(10, 20);
+    expect(result).not.toBe(15);
+    expect(result).toBe(30);
+  });
+});
+
+//vue example
+import Vue from 'vue';
+import LoginForm from './LoginForm.vue';
+
+describe('LoginForm.vue', () => {
+	test('컴포넌트가 마운팅 되면 username 초기값 설정', () => {
+		const instance = new Vue(LoginForm).$mount();
+		console.log(instance);
+		expect(instance.username).toBe('');
+	});
+});
+
+```
+>#### vue test util
+- vue test 공식 라이브러리 
+- [공식 사이트](https://vue-test-utils.vuejs.org/)
+```
+import { shallowMount } from '@vue/test-utils';
+import LoginForm from './LoginForm.vue';
+
+describe('LoginForm.vue', () => {
+	test('컴포넌트가 마운팅 되면 username 초기값 설정', () => {
+		const warpper = shallowMount(LoginForm);
+		//warpper.vm.username
+		expect(warpper.vm.username).toBe('');
+	});
+});
+```
+- HTML 요소 검색
+```
+describe('LoginForm.vue', () => {
+	test('', () => {
+		const warpper = shallowMount(LoginForm);
+		const idInput = warpper.find('#username');
+		console.log(idInput.html());
+	});
+});
+
+//result
+<input id="username" type="text">
+
+describe('LoginForm.vue', () => {
+	test('', () => {
+		const warpper = shallowMount(LoginForm, {
+			data() {
+				return {
+					username: 'test',
+				};
+			},
+		});
+		const idInput = warpper.find('#username');
+		console.log(idInput.html());
+		console.log(idInput.element.value);
+	});
+});
+
+//result
+<input id="username" type="text">
+test
+```
 >#### 
 - 
 ```
